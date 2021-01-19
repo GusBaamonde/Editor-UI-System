@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="14px" height="10px" viewBox="0 0 14 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>tick-success</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons/ok" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1.000000, -3.000000)">
+        <path d="M3.44579944,7.23742645 C2.8936836,6.67487341 1.99006593,6.66641239 1.42751289,7.21852823 C0.864959852,7.77064408 0.856498835,8.67426175 1.40861468,9.23681479 L4.68239855,12.5724862 C5.2284571,13.1288675 6.11993616,13.144143 6.68473579,12.6067964 L14.1953857,5.46121375 C14.7664505,4.91790646 14.7889524,4.01452939 14.2456451,3.44346458 C13.7023378,2.87239976 12.7989607,2.84989785 12.2278959,3.39320513 L5.73530521,9.57021302 L3.44579944,7.23742645 Z" id="tick-success" fill="#FFFFFF"></path>
+    </g>
+</svg>
