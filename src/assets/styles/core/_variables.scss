@@ -1,0 +1,97 @@
+///
+/// variables for paths
+///
+
+$imagePath: '../../images/';
+$iconPath: '/src/assets/images/icon-fonts/';
+$fontPath: '../../fonts/';
+
+///
+/// variables margins/paddings
+///
+
+$dp-spaces--lv0: 0;
+$dp-spaces--lv1: 6px;
+$dp-spaces--lv2: 12px;
+$dp-spaces--lv3: 18px;
+$dp-spaces--lv4: 24px;
+$dp-spaces--lv5: 30px;
+$dp-spaces--lv6: 36px;
+$dp-spaces--lv7: 42px;
+$dp-spaces--lv8: 48px;
+$dp-spaces--lv9: 54px;
+$dp-spaces--lv10: 60px;
+$dp-spaces--lv11: 66px;
+$dp-spaces--lv12: 72px;
+$dp-spaces--lv13: 78px;
+$dp-spaces--lv14: 84px;
+$dp-spaces--lv15: 90px;
+$dp-spaces--lv16: 96px;
+$dp-spaces--lv17: 102px;
+$dp-spaces--lv18: 108px;
+$dp-spaces--lv19: 114px;
+$dp-spaces--lv20: 120px;
+$dp-spaces--lv21: 126px;
+$dp-spaces--lv22: 132px;
+$dp-spaces--lv23: 138px;
+$dp-spaces--lv24: 144px;
+
+
+///
+/// Atomic classes for paddings and margins
+///
+
+.ed-library {
+    $spaceamounts: (
+      0,
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42,
+      48,
+      54,
+      60,
+      66,
+      72,
+      78,
+      84,
+      90,
+      96,
+      102,
+      108,
+      114,
+      120,
+      126,
+      132,
+      138,
+      144
+    ); /// The amount of spaces we use in levels
+    $sides: (top, bottom, left, right); /// Directions
+  
+    @each $space in $spaceamounts {
+      @each $side in $sides {
+        .m-#{str-slice($side, 0, 1)}-#{$space} {
+          margin-#{$side}: #{$space}px;
+        }
+  
+        .p-#{str-slice($side, 0, 1)}-#{$space} {
+          padding-#{$side}: #{$space}px;
+        }
+      }
+    }
+  
+    .ed-text--right {
+      text-align: right;
+    }
+  
+    .ed-text--left {
+      text-align: left;
+    }
+  
+    .ed-text--center {
+      text-align: center;
+    }
+  }

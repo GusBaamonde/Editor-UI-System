@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'proxima-nova';
+  src: url($fontPath + 'proxima-nova.eot');
+  src: url($fontPath + 'proxima-nova.eot?#iefix') format('embedded-opentype'),
+    url($fontPath + 'proxima-nova.woff2') format('woff2'),
+    url($fontPath + 'proxima-nova.woff') format('woff'),
+    url($fontPath + 'proxima-nova.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'bebas-regular';
+  src: url($fontPath + 'BebasNeue-Regular.eot');
+  src: url($fontPath + 'BebasNeue-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url($fontPath + 'BebasNeue-Regular.woff2') format('woff2'),
+    url($fontPath + 'BebasNeue-Regular.woff') format('woff'),
+    url($fontPath + 'BebasNeue-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
