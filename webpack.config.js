@@ -1,26 +1,53 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const htmlPlugins = generateHtmlPlugins('src/templates/views');
 
 module.exports = {
   target: 'web',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'vendor.js',
+    filename: './js/app.js',
   },
   module: {
     rules: [
       {
-        test: /\.(css|scss)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.(handlebars|hbs)$/,
-        loader: 'handlebars-loader'
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              url: false,
+            },
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true,
+              removeCR: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['postcss-preset-env']],
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,
@@ -46,6 +73,24 @@ module.exports = {
         loader: 'svg-sprite-loader',
       },
       {
+        test: /\.font\.js/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
+          },
+          {
+            loader: 'webfonts-loader',
+            options: {
+              publicPath: '../',
+            },
+          },
+        ],
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
@@ -54,33 +99,63 @@ module.exports = {
           publicPath: 'img',
         },
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=1024&name=fonts/[name].[ext]',
+      },
     ],
   },
-  devtool: false,
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
+    watchContentBase: true,
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/templates/index.html',
+    }),
+
     new MiniCssExtractPlugin({
       filename: 'css/styles.css',
     }),
-    new HtmlWebpackPlugin({
-      template: 'src/templates/index.hbs',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'src/assets/images', to: path.resolve(__dirname, './dist/img/') },
-      ],
-      options: {
-        concurrency: 100,
-      },
-    }),
-    
-    new webpack.SourceMapDevToolPlugin({}),
+
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       Promise: 'bluebird',
     }),
-  ],
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/assets/images',
+          to: path.resolve(__dirname, './dist/images/'),
+        },
+        {
+          from: 'src/assets/fonts',
+          to: path.resolve(__dirname, './dist/fonts/'),
+        },       
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ].concat(htmlPlugins)
 };
+
+function generateHtmlPlugins (templateDir) {
+  // Read files in template directory
+  const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir))
+  return templateFiles.map(item => {
+    // Split names and extension
+    const parts = item.split('.')
+    const name = parts[0]
+    const extension = parts[1]
+    // Create new HTMLWebpackPlugin with options
+    return new HtmlWebpackPlugin({
+      filename: `${name}.html`,
+      template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`)
+    })
+  })
+}

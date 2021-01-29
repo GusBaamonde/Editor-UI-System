@@ -10,17 +10,25 @@
     "clean-dist": "rimraf ./dist && mkdir dist",
     "build:dev": "npm run clean-dist && webpack --config webpack.config.dev.js",
     "build:prod": "npm run clean-dist && webpack --config webpack.config.prod.js",
-    "verify": "npm prettier-check && npm run eclint-check",
+    "verify": "npm run prettier-check && npm run eclint-check",
     "eclint-fix": "eclint fix \"**/*\"",
     "eclint-check": "eclint check \"**/*\"",
-    "prettier-fix": "prettier --write \"**/**\"",
+    "prettier": "prettier --write \"**/**\"",
     "prettier-check": "prettier --check \"**/**\""
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "last 3 iOS versions",
+    "Firefox > 20",
+    "ie 9"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "autoprefixer": "^10.0.2",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.3.0",
     "css-loader": "^3.5.3",
@@ -28,6 +36,7 @@
     "file-loader": "^6.0.0",
     "handlebars": "^4.7.6",
     "handlebars-loader": "^1.7.1",
+    "html-loader": "^1.3.2",
     "html-webpack-plugin": "^4.3.0",
     "image-minimizer-webpack-plugin": "^1.0.0",
     "imagemin-gifsicle": "^7.0.0",
@@ -37,12 +46,19 @@
     "jquery": "^3.5.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^5.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "post-loader": "^2.0.0",
+    "postcss": "^8.1.7",
+    "postcss-loader": "^4.0.4",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
     "regenerator-runtime": "^0.13.5",
+    "resolve-url-loader": "^3.1.2",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.0.5",
     "svg-sprite-loader": "^4.3.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webfonts-loader": "^7.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.0",
@@ -53,5 +69,6 @@
     "singleQuote": true,
     "trailingComma": "all",
     "arrowParens": "always"
-  }
+  },
+  "dependencies": {}
 }
